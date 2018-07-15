@@ -1,0 +1,7 @@
+#!/bin/sh
+
+tmp=$(mktemp -t passync)
+trap "rm -rf '$tmp'" EXIT
+
+./chrome_passwords.py > "$tmp"
+osascript -e csv-toicloudkeychain.applescript "$tmp"
